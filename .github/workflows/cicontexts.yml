@@ -10,7 +10,8 @@ jobs:
             - name: Print Trigger Event
               run: |
                 echo "my trigger event is ===== ${{ github.event_name }} ===="   
-                echo "$RUNNER_NAME"
+                echo "${{ runner.name }}"
+                echo "${{ runner.arch }}"
             
 
     
