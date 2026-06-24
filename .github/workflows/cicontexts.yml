@@ -6,7 +6,7 @@ jobs:
         runs-on: ubuntu-latest
         steps: 
             - name: Print Trigger Event
-              run: echo "my trigger event is ${{ github.event_name }}"           
+              run: echo "my trigger event is ===== ${{ github.event_name }} ===="           
             
 
     
