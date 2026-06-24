@@ -27,10 +27,14 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/cloud-with-asif:v1
-    # - name: run container
-    #   run: |
-    #     docker run -d -p 5000:5000  cloud-with-asif:v1
-    #     sleep 5
-    #     docker ps
-    # - name: test the deployement
-    #   run: curl http://localhost:5000
+  run-docker-container:
+    runs-on: ubuntu-latest
+    needs: flask-ci-job
+    steps:
+    - name: run container
+      run: |
+        docker run -d -p 5000:5000  cloud-with-asif:v1
+        sleep 5
+        docker ps
+    - name: test the deployement
+      run: curl http://localhost:5000
