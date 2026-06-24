@@ -36,10 +36,13 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.TOKEN }}
+    # STEP 1: Pull the image from your remote Docker Hub repository
+    - name: Pull Docker image
+      run: docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/cloud-with-asif:v1
+
     - name: run container
       run: |
-        docker login
-        docker run -d -p 5000:5000  cloud-with-asif:v1
+        docker run -d -p 5000:5000  ${{ secrets.DOCKER_HUB_USERNAME }}/cloud-with-asif:v1
         sleep 5
         docker ps
     - name: test the deployement
