@@ -38,6 +38,7 @@ jobs:
         password: ${{ secrets.TOKEN }}
     - name: run container
       run: |
+        docker login
         docker run -d -p 5000:5000  cloud-with-asif:v1
         sleep 5
         docker ps
