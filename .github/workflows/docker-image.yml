@@ -14,9 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build --tag cloud-with-asif .
+      run: docker build --tag cloud-with-asif:v1 .
     - name: run container
       run: |
-        docker run -d  -p 5000:5000 --name cloud-with-asif
+        docker run -d  -p 5000:5000  cloud-with-asif:v1
         sleep 5
         docker ps
