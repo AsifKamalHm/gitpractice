@@ -31,7 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Generate Dynamic docker image tag
-      run: echo "IMAGE_TAG=v${ GITHUB_RUN_NUMBER }-${GITHUB_SHA::7}" >> $GITHUB_ENV    # - name: Build the Docker image
+      run: echo "IMAGE_TAG=v${ GITHUB_RUN_NUMBER }-${GITHUB_SHA::7}" >> $GITHUB_ENV 
     - name: Display Build Information
       run: |
         echo "Application: $APPLICATION_NAME"
@@ -71,4 +71,4 @@ jobs:
       if: ${{ failure() }}
       run: docker logs flask-container
     - name: Cleanup
-      run: dokcer rm -f flask-container || true
+      run: docker rm -f flask-container || true
