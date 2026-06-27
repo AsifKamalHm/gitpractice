@@ -6,7 +6,7 @@ on:
     branches:
       - main
       - feature/*
-    path:
+    paths:
       - app/**
       - .github/workflow/**
   pull_request:
@@ -16,18 +16,18 @@ on:
       - opened
       - synchronize
       - ready_for_review
-  env:
-    APPLICATION_NAME: flask-application
-    DOCKER_USERNAME: asif21gm
+env:
+  APPLICATION_NAME: flask-application
+  DOCKER_USERNAME: asif21gm
 
 jobs:
 
   flask-build-test-job:
 
     runs-on: ubuntu-latest
-    if: ${{ github.event.name='push' && startsWith(github.ref_name, 'feature/') }} ||
-         (github.event_name == 'pull_request' && github.base_ref == 'main' && !contains(github.event.pull_request.title, 'WIP'))
-
+    if: |
+      (github.event_name == 'push' && startsWith(github.ref_name, 'feature/')) ||
+      (github.event_name == 'pull_request' && github.base_ref == 'main' && !contains(github.event.pull_request.title, 'WIP'))
     steps:
     # - name: Login to Docker Hub
     #   uses: docker/login-action@v4
@@ -37,8 +37,7 @@ jobs:
 
     - uses: actions/checkout@v4
     - name: Generate Dynamic docker image tag
-      run: echo "IMAG_TAG=${{ GITHUB_RUN_NUMBER }}"
-    # - name: Build the Docker image
+      run: echo "IMAGE_TAG=v${{ github.run_number }}" >> $GITHUB_ENV    # - name: Build the Docker image
     #   run: docker build --tag cloud-with-asif:v1 .
     # - name: Build and push
     #   uses: docker/build-push-action@v7
